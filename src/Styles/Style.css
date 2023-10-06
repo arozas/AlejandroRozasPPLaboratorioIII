@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+label {
+    display: inline;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="checkbox"] {
+    display: inline;
+    margin-right: 5px;
+}
+
+select, input[type="text"], input[type="number"], button, input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+input[type="text"]{
+    display: block;
+    width: 98.6%;
+}
+button, input[type="submit"] {
+    background-color: cornflowerblue;
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    background-color:forestgreen;
+}
+
+#boton-cancelar{
+    background-color:red;
+}
+/* Estilo para la tabla de datos */
+#tabla-datos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tabla-datos th {
+    padding: 10px;
+    background-color: cornflowerblue;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#tabla-datos td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
