@@ -44,7 +44,11 @@ input[type="submit"] {
 }
 
 #boton-cancelar{
-    background-color:red;
+    background-color:rgb(0, 89, 255);
+}
+
+#boton-eliminar{
+    background-color:rgb(255, 8, 0);
 }
 /* Estilo para la tabla de datos */
 #tabla-datos {

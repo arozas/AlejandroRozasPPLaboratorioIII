@@ -46,6 +46,7 @@ export default class FormularioDinamico {
   
       const submitButton = document.createElement("input");
       submitButton.type = "submit";
+      submitButton.setAttribute("id", "boton-agregar");
       submitButton.value = "Agregar";
   
       const cancelButton = document.createElement("button");
@@ -57,8 +58,30 @@ export default class FormularioDinamico {
         this.ocultarFormulario();
       });
   
+      const deleteButton = document.createElement("button");
+      deleteButton.setAttribute("id", "boton-eliminar");
+      deleteButton.type = "button";
+      deleteButton.textContent = "Eliminar";
+      deleteButton.style.display = "none";
+
+     // Agregar un manejador de eventos al botón "Eliminar"
+     deleteButton.addEventListener("click", () => {
+      if (this.IdEditar != null && this.IdEditar > 0) {
+        // Eliminar el objeto de la base de datos local
+        const datosDB = JSON.parse(localStorage.getItem("misDatos"));
+        const index = datosDB.findIndex((datos) => datos.id === this.IdEditar);
+        if (index !== -1) {
+          datosDB.splice(index, 1);
+          localStorage.setItem("misDatos", JSON.stringify(datosDB));
+          // Ocultar el formulario después de eliminar
+          this.ocultarFormulario();
+        }
+      }
+    });
+
       form.appendChild(submitButton);
       form.appendChild(cancelButton);
+      form.appendChild(deleteButton);
   
       return form;
     }
@@ -102,9 +125,17 @@ export default class FormularioDinamico {
       this.buttonContainer.querySelector("button").style.display = "block";
       this.formulario.reset();
       this.tipoSeleccionado = null;
+      const submitButton = document.getElementById("boton-agregar");
+      if(submitButton.value === "Modificar")
+      {
+        submitButton.value = "Agregar";
+      }
+      
       if (this.componenteOcultar) {
         this.componenteOcultar.style.display = "block";
       }
+      const Eliminar = document.getElementById("boton-eliminar");
+      Eliminar.style.display = "none";
     }
   
     actualizarCamposFormulario() {
@@ -181,6 +212,7 @@ export default class FormularioDinamico {
       
           // Actualizar la base de datos local
           localStorage.setItem("misDatos", JSON.stringify(datosDB));
+          this.actualizarCamposFormulario();
       
           // Ocultar el formulario
           this.ocultarFormulario();
@@ -201,6 +233,10 @@ export default class FormularioDinamico {
     abrirFormularioEditar(objeto) {
         this.mostrarFormulario();
         this.formulario.reset();
+        const submitButton = document.getElementById("boton-agregar");
+        submitButton.value = "Modificar";
+        const Eliminar = document.getElementById("boton-eliminar");
+        Eliminar.style.display = "block";
         this.tipoSeleccionado = objeto.constructor;
         this.actualizarCamposFormulario();
         this.IdEditar=objeto.id;
